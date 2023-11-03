@@ -1,0 +1,16 @@
+{
+  "name": "opencore-api",
+  "version": "1.0.0",
+  "description": "API for Opencore files (get the latest version of OC and tools, etc)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.ts",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "mateis-rgb",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^5.2.2"
+  }
+}
