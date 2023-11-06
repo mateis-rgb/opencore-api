@@ -1,12 +1,12 @@
 {
 	"compilerOptions": {
-		
-	  "module": "ES2022",
-	  "moduleResolution": "Bundler",
-	  "noImplicitAny": true,
-	  "removeComments": true,
-	  "preserveConstEnums": true,
-	  "outDir": "./dist"
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"esModuleInterop": true,
+		"noImplicitAny": true,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"outDir": "./dist"
 	},
 	"include": ["."]
 }
