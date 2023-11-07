@@ -1,7 +1,9 @@
 import express from "express";
 import morgan from "morgan";
 import dotenv from 'dotenv';
+import fs from "fs";
 import { OCReturn } from "./types";
+import path from "path";
 
 dotenv.config();
 
@@ -12,7 +14,11 @@ if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
 
-app.get('/api/get/opencore', async (req, res) => {
+app.get("/api/update/parts", async (req, res) => {
+    const data = await fetch("https://api.github.com/repos/docyx/pc-part-dataset/contents/blob/main/data/json/cpu.json")
+});
+
+app.get('/api/update/opencore', async (req, res) => {
     const data = await fetch("https://api.github.com/repos/acidanthera/OpenCorePkg/releases/latest");
     const dataJSON = await data.json();
 
@@ -30,6 +36,14 @@ app.get('/api/get/opencore', async (req, res) => {
         date: dataJSON.published_at,
         content: dataJSON.body
     }
+
+    fs.writeFileSync(
+        path.join(path.resolve(), "/storage/opencore.json"), 
+        JSON.stringify(returnedData), 
+        { 
+            encoding: "utf8"
+        }
+    );
 
     return res.status(200).json(returnedData);
 });
