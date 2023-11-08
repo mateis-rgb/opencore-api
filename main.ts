@@ -15,7 +15,23 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.get("/api/update/parts", async (req, res) => {
-    const data = await fetch("https://api.github.com/repos/docyx/pc-part-dataset/contents/blob/main/data/json/cpu.json")
+    const data = await fetch("https://api.github.com/repos/docyx/pc-part-dataset/contents/data/json/cpu.json")
+    const dataJSON = await data.json();
+    
+    if (!data) {
+        return res.status(404).json("Something went wrong...");    
+    }
+    
+    const content = dataJSON.content;
+    const contentDecoded = atob(content);
+    const contentDecodedJSON = JSON.parse(contentDecoded);
+    
+    if (!contentDecoded) {
+        return res.status(404).json("Something went wrong...");    
+    }
+
+    return res.status(200).json(contentDecodedJSON);
+
 });
 
 app.get('/api/update/opencore', async (req, res) => {
